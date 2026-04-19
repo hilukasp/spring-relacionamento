@@ -62,4 +62,9 @@ public class CursoService {
     public Double getMedia() {
         return cursoRepository.getMedia();
     }
+
+    public List<Curso> buscarPorIdprofessor(Integer id) {
+        return cursoRepository.findByProfessorId(id);
+    }
+
 }

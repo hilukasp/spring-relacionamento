@@ -19,19 +19,24 @@ public class CursoMapper {
     }
 
     public static CursoResponseDto toResponseDto(Curso curso) {
+        // Pega o objeto Professor que está dentro de Curso (relacionamento N:1)
         Professor professorEntidade = curso.getProfessor();
 
+        // Cria um DTO interno (aninhado) para representar o professor no response
         CursoResponseDto.ProfessorCursoDto professorDto =new CursoResponseDto.ProfessorCursoDto();
         professorDto.setId(professorEntidade.getId());
         professorDto.setNome(professorEntidade.getNome());
 
+        // Cria o DTO principal de resposta (CursoResponseDto)
         CursoResponseDto dto = new CursoResponseDto();
+        // Define o professor (DTO aninhado) dentro do DTO do curso
+        dto.setProfessor(professorDto);
+
         dto.setId(curso.getId());
         dto.setNome(curso.getNome());
         dto.setDataInicio(curso.getDataInicio());
         dto.setDataFim(curso.getDataFim());
         dto.setNota(curso.getNota());
-        dto.setProfessor(professorDto);
         return dto;
     }
 

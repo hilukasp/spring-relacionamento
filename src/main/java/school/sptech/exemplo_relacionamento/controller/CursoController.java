@@ -9,6 +9,7 @@ import school.sptech.exemplo_relacionamento.mapper.CursoMapper;
 import school.sptech.exemplo_relacionamento.model.Curso;
 import school.sptech.exemplo_relacionamento.service.CursoService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,6 +32,7 @@ public class CursoController {
     @GetMapping
     public ResponseEntity<List<CursoResponseDto>> listar() {
         List<Curso> cursos = cursoService.listar();
+        System.out.println(cursos);
         return ResponseEntity.ok(CursoMapper.toResponseDtoList(cursos));
     }
 
@@ -65,5 +67,23 @@ public class CursoController {
 
         Double resultado=cursoService.getMedia();
         return ResponseEntity.ok(resultado);
+    }
+
+    //Como listar curso passando por parametro o id da entidade Professor
+    @GetMapping("/professor/{id}")
+    public ResponseEntity<List<CursoResponseDto>> listarporIdprofessor(@PathVariable Integer professorid) {
+        List<Curso> cursosprofessor=cursoService.buscarPorIdprofessor(professorid);
+
+        //lógica que funciona mas não tem a mesma performance
+//        List<Curso> cursos = cursoService.listar();
+//        List<Curso> cursosprofessor= new ArrayList<>();
+//        for (Curso curso : cursos) {
+//            if (id==curso.getProfessor().getId()) {
+//                cursosprofessor.add(curso);
+//            }
+//        }
+
+
+        return ResponseEntity.ok(CursoMapper.toResponseDtoList(cursosprofessor));
     }
 }
