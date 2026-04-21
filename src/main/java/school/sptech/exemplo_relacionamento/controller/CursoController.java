@@ -43,9 +43,9 @@ public class CursoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CursoResponseDto> atualizar(@PathVariable Integer id, @RequestBody @Valid CursoRequestDto dto,Integer professorId) {
+    public ResponseEntity<CursoResponseDto> atualizar(@PathVariable Integer id, @RequestBody @Valid CursoRequestDto dto) {
         Curso curso = CursoMapper.toEntity(dto);
-        Curso atualizado = cursoService.atualizar(id, curso,professorId);
+        Curso atualizado = cursoService.atualizar(id, curso,dto.getProfessor_id());
         return ResponseEntity.ok(CursoMapper.toResponseDto(atualizado));
     }
 

@@ -5,6 +5,7 @@ import school.sptech.exemplo_relacionamento.exception.ProfessorNaoEncontradoExce
 import school.sptech.exemplo_relacionamento.model.Professor;
 import school.sptech.exemplo_relacionamento.repository.ProfessorRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,6 +18,7 @@ public class ProfessorService {
     }
 
     public Professor criar(Professor professor) {
+        professor.setCadastradoEm(LocalDateTime.now());
         return professorRepository.save(professor);
     }
 

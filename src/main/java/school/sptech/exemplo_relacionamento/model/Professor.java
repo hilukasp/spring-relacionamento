@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,11 @@ public class Professor {
     private Boolean premium;
 
     //relacionamento
-    @OneToMany(mappedBy = "professor")//mapped by -> mapeia por professor. se deixar sem ele cria uma tabela associativa
-    private List<Curso> cursos;
+    @OneToMany(mappedBy = "professor",//mapped by -> mapeia por professor. se deixar sem ele cria uma tabela associativa
+            cascade = CascadeType.ALL,//deleção em cascata
+            orphanRemoval = true)
+    //new arraylist para permitir de que o curso possa ser null na hora da exibição
+    private List<Curso> cursos = new ArrayList<>();
 
     public Integer getId() {
         return id;
