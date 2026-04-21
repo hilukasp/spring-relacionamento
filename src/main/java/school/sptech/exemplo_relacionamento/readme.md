@@ -15,3 +15,5 @@ getter e setter
 coloca ela em um atributo. private Objeto
 
 -mapper
+Cria dto aninhada de outra tabela
+repassa a dto aninhada e atribui ela ao atributo que há o relacionamento
